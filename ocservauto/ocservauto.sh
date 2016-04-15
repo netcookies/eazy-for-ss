@@ -393,8 +393,10 @@ function tar_lz4_install(){
     rm -r lz4
     if [ `getconf WORD_BIT` = '32' ] && [ `getconf LONG_BIT` = '64' ]; then
         ln -sf /usr/local/lib/liblz4.* /usr/lib/x86_64-linux-gnu/
-    else
+    elif [ -d "/usr/lib/i386-linux-gnu" ]; then
         ln -sf /usr/local/lib/liblz4.* /usr/lib/i386-linux-gnu/
+    else
+            ln -sf /usr/local/lib/liblz4.* /usr/lib/
     fi
     print_info "[ lz4 ] ok"
 }
@@ -403,7 +405,7 @@ function tar_lz4_install(){
 function tar_freeradius_client_install(){
     print_info "Installing freeradius-client-1.1.7"
     DEBIAN_FRONTEND=noninteractive apt-get -y -qq remove --purge freeradius-client*
-    wget -c ftp://ftp.freeradius.org/pub/freeradius/freeradius-client-1.1.7.tar.gz
+    wget -c http://pkgs.fedoraproject.org/repo/pkgs/freeradius-client/freeradius-client-1.1.7.tar.gz/md5/43b4d21715b613dc4fe8ef128467fe78/freeradius-client-1.1.7.tar.gz
     tar -zxf freeradius-client-1.1.7.tar.gz
     cd freeradius-client-1.1.7
     ./configure --prefix=/usr --sysconfdir=/etc
@@ -497,7 +499,7 @@ function tar_ocserv_install(){
         oc_version='0.10.8'
         curl -SOL "https://github.com/fanyueciyuan/ocserv-backup/raw/master/ocserv-$oc_version.tar.xz"
     } || {
-        wget -c ftp://ftp.infradead.org/pub/ocserv/ocserv-$oc_version.tar.xz
+        wget -c https://github.com/fanyueciyuan/ocserv-backup/raw/master/ocserv-$oc_version.tar.xz --no-check-certificate -O ocserv-$oc_version.tar.xz
     }
     tar xvf ocserv-$oc_version.tar.xz
     rm -rf ocserv-$oc_version.tar.xz
