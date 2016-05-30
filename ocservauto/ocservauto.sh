@@ -497,9 +497,9 @@ function tar_ocserv_install(){
     [ "$OC_version_latest" = "" ] && {
 #可以换成自己的下载地址
         oc_version='0.10.8'
-        curl -SOL "https://github.com/fanyueciyuan/ocserv-backup/raw/master/ocserv-$oc_version.tar.xz"
+        curl -SOL "https://github.com/netcookies/ocserv-backup/raw/master/ocserv-$oc_version.tar.xz"
     } || {
-        wget -c https://github.com/fanyueciyuan/ocserv-backup/raw/master/ocserv-$oc_version.tar.xz --no-check-certificate -O ocserv-$oc_version.tar.xz
+        wget -c https://github.com/netcookies/ocserv-backup/raw/master/ocserv-$oc_version.tar.xz --no-check-certificate -O ocserv-$oc_version.tar.xz
     }
     tar xvf ocserv-$oc_version.tar.xz
     rm -rf ocserv-$oc_version.tar.xz
